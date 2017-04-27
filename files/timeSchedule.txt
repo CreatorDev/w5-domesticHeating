@@ -1,0 +1,12 @@
+id: night, 18
+id: day, 21
+id: off, 13
+
+week: saturday 11:00, day
+week: saturday 21:00, night
+week: sunday 11:00, day
+week: sunday 21:00, night
+
+week: every 00:00, night
+week: every 08:00, day
+week: every 23:00, night

@@ -1,0 +1,63 @@
+@startuml
+
+title Domestic Heating Controller
+
+rectangle "Ci40" {
+	  [Awa Bootstrap] as AWA_BOOTSTRAP
+    [Awa Server] as AWA_SERVER
+    [Domestic Heating Application] as APP
+
+
+    [Relay Application] as R_APP
+    [Master Controller Client] as MCC
+}
+
+rectangle "External Drive" {
+    database "SQLite" {
+        [Sensors Measurements] as [DB]
+    }
+
+    [Configurations] as CFG
+}
+
+rectangle "Sensors" {
+    [Temperature Clicker] as TC
+    [Motion Clicker] as MC
+}
+
+
+cloud {
+    [Device Server] as DS
+    [Web App] as WA
+    [Dashboard] as DASHB
+}
+
+[APP] -right-> [CFG]
+note right of DB
+Stores temperature readings, movement detections and
+logs heat relay activations.
+end note
+[APP] -right-> [DB]
+
+[APP] -down-> [AWA_SERVER]:IPC
+[MCC] -up-> [AWA_SERVER]:CoAP
+[R_APP] -right-> [AWA_SERVER]:CoAP
+
+note right of AWA_SERVER
+    Local AWA server
+end note
+[MC] -up-> [AWA_SERVER]:CoAP
+[TC] -up-> [AWA_SERVER]:CoAP
+note left of AWA_BOOTSTRAP
+    Redirect clients to Device Server and a local awa server.
+end note
+
+[MCC] -down-> [DS]:CoAP
+[MC] -left-> [DS]:CoAP
+[TC] -left-> [DS]:CoAP
+
+
+[DS] -left-> [WA]
+[DASHB] -down-> [WA]
+
+@enduml
