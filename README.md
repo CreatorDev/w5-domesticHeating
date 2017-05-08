@@ -2,14 +2,14 @@
 # Ci40 Domestic Heating Controller
 
 ## Overview <a name="overview"></a>
-Ci40 Domestic Heating Controller is an exemplary IoT system running on the Ci40. It is one of the embedded components of a larger system of temperature monitoring and control. The other components of this project include:
-[projects running on a Contiki platform](https://gitlab.flowcloud.systems/creator/contiki-project5-sensors), [cloud based back-end](https://gitlab.flowcloud.systems/creator/project5-webapp) and
-[front-end](https://gitlab.flowcloud.systems/creator/project5-dashboard).
+Ci40 Domestic Heating Controller is an example IoT system running on the Ci40. It is one of the embedded components of a larger system of temperature monitoring and control. The other components for this project include:
+Temperature and Motion sensors using AwaLWM2M to provide IPSO objects for the sensor status, [cloud based back-end](https://github.com/CreatorDev/w5-domesticHeatingWebApp) and
+[front-end](https://github.com/CreatorDev/w5-domesticHeatingDashboard).
 
 The main aim of this application is to provide heating control logic that interacts
 with a relay and two remote sensors (temperature and motion).
-The system collects temperature data from a thermo3 click and stores it in a local
-SQLite database as well as movement events triggered from the proximity sensor.
+The system has been designed to collect temperature data from a thermo3 Click running on a different wireless board that is provided to the user's Creator Device Server account, store the temperature data in a local
+SQLite database, and overlay movement events triggered from a Click proximity sensor running on another wireless, provided board.
 
 The [heating schedule](#time_schedule_format) for the home should be configurable by the user - even if Internet access is lost.
 
